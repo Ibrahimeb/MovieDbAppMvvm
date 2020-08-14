@@ -15,17 +15,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(ApplicationComponent::class)
-class networkModule {
+class NetworkModule {
 
+    @BaseUrl
     @Provides
     fun providerBaseUrl(@ApplicationContext context: Context) = context.getString(R.string.base_url)
 
+    @ApiKey
+    @Provides
+    fun providerApiToken(@ApplicationContext context: Context) = context.getString(R.string.api_key)
 
     @Provides
     fun providerGson(): Gson = GsonBuilder().create()
 
     @Provides
-    fun providerRetrofit(okHttpClient: OkHttpClient, gson: Gson, url: String): Retrofit = Retrofit.Builder()
+    fun providerRetrofit(okHttpClient: OkHttpClient, gson: Gson, @BaseUrl url: String): Retrofit = Retrofit.Builder()
         .baseUrl(url)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient)
