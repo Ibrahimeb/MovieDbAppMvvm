@@ -2,4 +2,6 @@
     <string name="app_name">movieDbMvvm</string>
     <string name="base_url" translatable="false">https://api.themoviedb.org/3/</string>
     <string name="api_key">e633d5667f2c7b610499bcce8643aa5c</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

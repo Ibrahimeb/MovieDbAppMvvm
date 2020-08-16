@@ -35,7 +35,7 @@ class InterceptorModule {
         httpLoggingInterceptor: HttpLoggingInterceptor,
         cache: Cache,
         @ApplicationContext context: Context
-    ) =
+    ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .cache(cache)
