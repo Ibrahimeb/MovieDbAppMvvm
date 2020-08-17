@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ibrahim.dev.moviedbmvvm.R
 import com.ibrahim.dev.moviedbmvvm.databinding.FragmentHomeBinding
 import com.ibrahim.dev.moviedbmvvm.domain.models.movie.MovieModels
 import com.ibrahim.dev.moviedbmvvm.domain.models.tvshow.TvModels
 import com.ibrahim.dev.moviedbmvvm.presentation.adapter.DataItem
 import com.ibrahim.dev.moviedbmvvm.presentation.adapter.GenericAdapter
+import com.ibrahim.dev.moviedbmvvm.presentation.adapter.actions.EventGenericAdapter
 import com.ibrahim.dev.moviedbmvvm.presentation.viewmodels.DataHomeResponse
 import com.ibrahim.dev.moviedbmvvm.presentation.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +53,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        homeAdapter = GenericAdapter { }
+        homeAdapter = GenericAdapter {
+            handleAdapterEvent(it)
+        }
 
         binding.recyclerview.apply {
             adapter = homeAdapter
@@ -56,6 +63,21 @@ class HomeFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
 
+    }
+
+    private fun handleAdapterEvent(event: EventGenericAdapter) {
+        when (event) {
+            is EventGenericAdapter.LaunchSpecificListFragment -> launchListFragment(event.nameList)
+        }
+    }
+
+    private fun launchListFragment(nameList: String) {
+        findNavController().navigate(
+            HomeFragmentDirections
+                .actionHomeFragmentToMovieListFragment(
+                    nameList
+                )
+        )
     }
 
     private fun subscribeLiveData() {

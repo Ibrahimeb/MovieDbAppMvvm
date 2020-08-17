@@ -1,12 +1,15 @@
 package com.ibrahim.dev.moviedbmvvm.presentation.viewmodels
 
+import android.content.Context
 import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ibrahim.dev.moviedbmvvm.R
 import com.ibrahim.dev.moviedbmvvm.domain.usescase.HomeUseCase
+import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -14,7 +17,8 @@ import javax.inject.Inject
 
 @ActivityScoped
 class HomeViewModel @ViewModelInject constructor(
-    private val useCase: HomeUseCase
+    private val useCase: HomeUseCase,
+    @ActivityContext private val context:Context
 ) : ViewModel() {
 
     private val TAG = this::class.java.simpleName
@@ -44,7 +48,7 @@ class HomeViewModel @ViewModelInject constructor(
                 _progressBarLiveData.value = false
                 useCase.getPopularMovie().collect {
                     _requestHomeLiveData.value =
-                        DataHomeResponse.MovieResponse(it, "Popular Movies")
+                        DataHomeResponse.MovieResponse(it, context.getString(R.string.popular_movies))
                 }
             } catch (e: Throwable) {
                 _progressBarLiveData.value = false
@@ -60,7 +64,7 @@ class HomeViewModel @ViewModelInject constructor(
                 _progressBarLiveData.value = false
                 useCase.getTopRateMovie().collect {
                     _requestHomeLiveData.value =
-                        DataHomeResponse.MovieResponse(it, "Top Rate Movies")
+                        DataHomeResponse.MovieResponse(it, context.getString(R.string.top_rate_movies))
                 }
             } catch (e: Throwable) {
                 _progressBarLiveData.value = false
@@ -77,7 +81,7 @@ class HomeViewModel @ViewModelInject constructor(
                 _progressBarLiveData.value = false
                 useCase.getUpComingMovie().collect {
                     _requestHomeLiveData.value =
-                        DataHomeResponse.MovieResponse(it, "Up Coming Movies")
+                        DataHomeResponse.MovieResponse(it, context.getString(R.string.up_coming_movie))
                 }
             } catch (e: Throwable) {
                 _progressBarLiveData.value = false
@@ -93,7 +97,7 @@ class HomeViewModel @ViewModelInject constructor(
                 _progressBarLiveData.value = false
                 useCase.getPopularTvShow().collect {
                     _requestHomeLiveData.value =
-                        DataHomeResponse.TvShowResponse(it, "Popular Tv Show")
+                        DataHomeResponse.TvShowResponse(it, context.getString(R.string.popular_tv))
                 }
             } catch (e: Throwable) {
                 _progressBarLiveData.value = false
@@ -109,7 +113,7 @@ class HomeViewModel @ViewModelInject constructor(
                 _progressBarLiveData.value = false
                 useCase.getTopRateTvShow().collect {
                     _requestHomeLiveData.value =
-                        DataHomeResponse.TvShowResponse(it, "Top Rate Tv Show")
+                        DataHomeResponse.TvShowResponse(it, context.getString(R.string.top_rate_tv))
                 }
             } catch (e: Throwable) {
                 _progressBarLiveData.value = false
@@ -125,7 +129,7 @@ class HomeViewModel @ViewModelInject constructor(
                 _progressBarLiveData.value = false
                 useCase.getUpOnAirTvShow().collect {
                     _requestHomeLiveData.value =
-                        DataHomeResponse.TvShowResponse(it, "On Air Tv Show")
+                        DataHomeResponse.TvShowResponse(it, context.getString(R.string.on_air_tv))
                 }
             } catch (e: Throwable) {
                 _progressBarLiveData.value = false

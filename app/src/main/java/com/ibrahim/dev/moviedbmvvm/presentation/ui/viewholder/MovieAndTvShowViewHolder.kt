@@ -7,6 +7,7 @@ import com.ibrahim.dev.moviedbmvvm.app.utils.Utils
 import com.ibrahim.dev.moviedbmvvm.databinding.ItemListBinding
 import com.ibrahim.dev.moviedbmvvm.presentation.adapter.DataItem
 import com.ibrahim.dev.moviedbmvvm.presentation.adapter.ItemViewHolder
+import com.ibrahim.dev.moviedbmvvm.presentation.adapter.actions.EventGenericAdapter
 import com.squareup.picasso.Picasso
 
 class MovieAndTvShowViewHolder(private val binding: ItemListBinding) :
@@ -19,7 +20,7 @@ class MovieAndTvShowViewHolder(private val binding: ItemListBinding) :
             )
     }
 
-    override fun bind(callback: () -> Unit, dataItem: DataItem) {
+    override fun bind(callback: (EventGenericAdapter) -> Unit, dataItem: DataItem) {
         when (dataItem) {
             is DataItem.TvShowItem -> bindTvShow(dataItem)
             is DataItem.MovieItem -> bindMovie(dataItem)

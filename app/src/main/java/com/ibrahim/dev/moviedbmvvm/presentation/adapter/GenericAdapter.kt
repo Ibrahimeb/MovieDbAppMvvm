@@ -2,6 +2,7 @@ package com.ibrahim.dev.moviedbmvvm.presentation.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.ibrahim.dev.moviedbmvvm.presentation.adapter.actions.EventGenericAdapter
 import com.ibrahim.dev.moviedbmvvm.presentation.ui.viewholder.HeaderViewHolder
 import com.ibrahim.dev.moviedbmvvm.presentation.ui.viewholder.MovieAndTvShowHomeViewHolder
 import com.ibrahim.dev.moviedbmvvm.presentation.ui.viewholder.MovieAndTvShowViewHolder
@@ -11,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class GenericAdapter(private val callback: () -> Unit) :
+class GenericAdapter(private val callback: (EventGenericAdapter) -> Unit) :
     ListAdapter<DataItem, ItemViewHolder>(AdapterDiff()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)

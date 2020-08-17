@@ -8,6 +8,7 @@ import com.ibrahim.dev.moviedbmvvm.databinding.ItemSubRvHomeBinding
 import com.ibrahim.dev.moviedbmvvm.presentation.adapter.DataItem
 import com.ibrahim.dev.moviedbmvvm.presentation.adapter.GenericAdapter
 import com.ibrahim.dev.moviedbmvvm.presentation.adapter.ItemViewHolder
+import com.ibrahim.dev.moviedbmvvm.presentation.adapter.actions.EventGenericAdapter
 import java.lang.Exception
 
 class SubRvHomeViewHolder(private val binding: ItemSubRvHomeBinding) :
@@ -20,7 +21,7 @@ class SubRvHomeViewHolder(private val binding: ItemSubRvHomeBinding) :
             )
     }
 
-    override fun bind(callback: () -> Unit, dataItem: DataItem) {
+    override fun bind(callback: (EventGenericAdapter) -> Unit, dataItem: DataItem) {
         val genericAdapter = GenericAdapter {}
         binding.recyclerview.apply {
             adapter = genericAdapter
@@ -39,11 +40,11 @@ class SubRvHomeViewHolder(private val binding: ItemSubRvHomeBinding) :
 
 
     private fun getSorterListTvShow(dataItem: DataItem.SubListHomeItemTvShow): List<DataItem> {
-        return dataItem.list.map { DataItem.TvShowItem(it) }
+        return dataItem.list.map { DataItem.TvShowItemHome(it) }
     }
 
     private fun getSorterListMovie(dataItem: DataItem.SubListHomeItemMovie): List<DataItem> {
-        return dataItem.list.map { DataItem.MovieItem(it) }
+        return dataItem.list.map { DataItem.MovieItemHome(it) }
     }
 
 }
