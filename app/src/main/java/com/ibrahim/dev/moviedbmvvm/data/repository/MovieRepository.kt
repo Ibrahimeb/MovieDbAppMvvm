@@ -15,6 +15,12 @@ class MovieRepository @Inject constructor(
     fun getPopularMovie(
         @Query("language") language: String = "en-US"
     ) = flow {
-        emit(movieApi.getMoviePopular(apiKey, language))
+        emit(movieApi.getMoviePopular(apiKey, language).toModel())
     }
+
+    fun getMovieUpComing(){}
+
+    fun getMovieTopRated(){}
+
+    fun getMovieCategory(){}
 }

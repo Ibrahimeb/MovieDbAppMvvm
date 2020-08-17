@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ibrahim.dev.moviedbmvvm.app.di.BaseUrl
 import com.ibrahim.dev.moviedbmvvm.app.utils.show
 import com.ibrahim.dev.moviedbmvvm.databinding.FragmentMovieListBinding
-import com.ibrahim.dev.moviedbmvvm.presentation.adapter.movie.MovieAdapter
+import com.ibrahim.dev.moviedbmvvm.presentation.adapter.DataItem
+import com.ibrahim.dev.moviedbmvvm.presentation.adapter.GenericAdapter
 import com.ibrahim.dev.moviedbmvvm.presentation.viewmodels.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -22,20 +23,17 @@ import javax.inject.Inject
 class MovieListFragment : Fragment() {
 
     @BaseUrl
-    @Inject lateinit var url:String
+    @Inject
+    lateinit var url: String
 
     private val viewModel: MovieViewModel by viewModels()
 
     private lateinit var binding: FragmentMovieListBinding
 
-    lateinit var movieAdapter: MovieAdapter
+    private lateinit var adapterGeneric: GenericAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        movieAdapter =
-            MovieAdapter(
-                requireContext()
-            )
         viewModel.getPopularMovie()
     }
 
@@ -56,15 +54,19 @@ class MovieListFragment : Fragment() {
 
     private fun initRecyclerView() {
         val manager = GridLayoutManager(activity, 2)
+        adapterGeneric = GenericAdapter {}
         binding.recyclerview.apply {
             layoutManager = manager
-            adapter = movieAdapter
+            adapter = adapterGeneric
         }
     }
 
     private fun subscribeLiveData() {
-        viewModel.movieLiveData.observe(viewLifecycleOwner, Observer {
-            movieAdapter.submitList(it.results)
+        viewModel.movieLiveData.observe(viewLifecycleOwner, Observer { movieModels ->
+            val listItem = movieModels.pageMovieModels.map {
+                DataItem.MovieItem(it)
+            }
+            adapterGeneric.addHeaderAndSubmitList(listItem)
         })
         viewModel.progressBarLiveData.observe(viewLifecycleOwner, Observer {
             binding.progressBar.show(it)

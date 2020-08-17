@@ -1,19 +1,8 @@
 package com.ibrahim.dev.moviedbmvvm.data.entities.movie
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.ibrahim.dev.moviedbmvvm.data.entities.movie.ResponseMovie
 
-@Entity(
-    foreignKeys = [ForeignKey(
-    entity = ResponseMovie::class,
-        childColumns = arrayOf("originPage"),
-        parentColumns = arrayOf("page"),
-        onDelete = ForeignKey.CASCADE
-    )]
-)
+
 data class ResultsItem(
     @field:SerializedName("overview")
     val overview: String,
@@ -37,10 +26,8 @@ data class ResultsItem(
     val popularity: Double,
     @field:SerializedName("vote_average")
     val voteAverage: Double,
-    @PrimaryKey
     @field:SerializedName("id")
     val id: Int,
-    val originPage:Int,
     @field:SerializedName("adult")
     val adult: Boolean,
     @field:SerializedName("vote_count")

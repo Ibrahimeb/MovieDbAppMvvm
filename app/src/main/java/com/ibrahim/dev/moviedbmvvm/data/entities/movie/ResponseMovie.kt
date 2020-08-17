@@ -1,19 +1,34 @@
 package com.ibrahim.dev.moviedbmvvm.data.entities.movie
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.ibrahim.dev.moviedbmvvm.domain.models.movie.MovieModels
+import com.ibrahim.dev.moviedbmvvm.domain.models.movie.MovieItemListModels
 
-@Entity
 data class ResponseMovie(
 
-    @PrimaryKey
     @field:SerializedName("page")
-    val page: Int = -1,
+    private val page: Int = -1,
 
     @field:SerializedName("total_pages")
-    val totalPage: Int,
+    private val totalPage: Int,
 
     @field:SerializedName("results")
-    val results: List<ResultsItem> = emptyList()
-)
+    private val results: List<ResultsItem> = emptyList()
+) {
+    fun toModel() = MovieModels(page, totalPage, results.map {
+        with(it) {
+            MovieItemListModels(
+                overview,
+                originalTitle,
+                originalLanguage,
+                genreIds,
+                posterPath,
+                backdropPath,
+                releaseDate,
+                voteAverage,
+                id,
+                page
+            )
+        }
+    })
+}

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ibrahim.dev.moviedbmvvm.data.entities.movie.ResponseMovie
 import com.ibrahim.dev.moviedbmvvm.data.repository.MovieRepository
+import com.ibrahim.dev.moviedbmvvm.domain.models.movie.MovieModels
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -16,8 +17,8 @@ import kotlinx.coroutines.launch
 class MovieViewModel @ViewModelInject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
-    private val _movieLiveData = MutableLiveData<ResponseMovie>()
-    val movieLiveData: LiveData<ResponseMovie> get() = _movieLiveData
+    private val _movieLiveData = MutableLiveData<MovieModels>()
+    val movieLiveData: LiveData<MovieModels> get() = _movieLiveData
 
     private val _progressBarLiveData = MutableLiveData<Boolean>()
     val progressBarLiveData: LiveData<Boolean> get() = _progressBarLiveData

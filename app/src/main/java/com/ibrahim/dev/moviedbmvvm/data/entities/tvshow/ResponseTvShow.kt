@@ -1,6 +1,8 @@
 package com.ibrahim.dev.moviedbmvvm.data.entities.tvshow
 
 import com.google.gson.annotations.SerializedName
+import com.ibrahim.dev.moviedbmvvm.domain.models.tvshow.TvListItemModels
+import com.ibrahim.dev.moviedbmvvm.domain.models.tvshow.TvModels
 import com.ibrahim.moviedbapp.home.tvShow.models.ResultsItemTv
 
 data class ResponseTvShow(
@@ -16,5 +18,23 @@ data class ResponseTvShow(
 
     @field:SerializedName("total_results")
     val totalResults: Int
-)
+) {
+    fun toModels() = TvModels(page, totalPages, results.map {
+        with(it) {
+            TvListItemModels(
+                overview,
+                originalName,
+                originalLanguage,
+                genreIds,
+                posterPath,
+                backdropPath,
+                originCountry,
+                firstAirDate,
+                popularity,
+                id,
+                page
+            )
+        }
+    })
+}
 
