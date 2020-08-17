@@ -9,7 +9,7 @@ import com.ibrahim.dev.moviedbmvvm.domain.models.GenresItemModel
 data class ResponseCategory(
 
     @field:SerializedName("genres")
-    val genres: List<GenresItem>
+    private val genres: List<GenresItem>
 ) {
     fun toModel() = CategoryModel(
         genres.map {

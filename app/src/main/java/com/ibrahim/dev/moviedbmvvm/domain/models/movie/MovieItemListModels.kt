@@ -19,7 +19,7 @@ data class MovieItemListModels(
     val originalLanguage: String,
     val genreIds: List<Int>,
     val posterPath: String,
-    val backdropPath: String,
+    val backdropPath: String?,
     val releaseDate: String,
     val voteAverage: Double,
     @PrimaryKey

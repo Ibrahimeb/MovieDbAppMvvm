@@ -9,25 +9,48 @@ import com.ibrahim.dev.moviedbmvvm.presentation.adapter.DataItem
 import com.ibrahim.dev.moviedbmvvm.presentation.adapter.ItemViewHolder
 import com.squareup.picasso.Picasso
 
-class MovieViewHolder(private val binding: ItemListBinding) : ItemViewHolder(binding.root) {
+class MovieAndTvShowViewHolder(private val binding: ItemListBinding) :
+    ItemViewHolder(binding.root) {
 
     companion object {
-        fun from(parent: ViewGroup): MovieViewHolder =
-            MovieViewHolder(
+        fun from(parent: ViewGroup): MovieAndTvShowViewHolder =
+            MovieAndTvShowViewHolder(
                 ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
     }
 
-
     override fun bind(callback: () -> Unit, dataItem: DataItem) {
-        val item = dataItem as DataItem.MovieItem
+        when (dataItem) {
+            is DataItem.TvShowItem -> bindTvShow(dataItem)
+            is DataItem.MovieItem -> bindMovie(dataItem)
+        }
+    }
+
+    private fun bindMovie(dataItem: DataItem.MovieItem) {
         binding.apply {
-            with(item.movieItem) {
+            with(dataItem.movieItem) {
                 tvTitle.text = originalTitle
                 tvRate.text = voteAverage.toString()
                 tvYear.text = Utils.getYear(Utils.parseStringDate(releaseDate)).toString()
                 Picasso.get().load(Utils.getImageUrlLarge(posterPath))
                     .placeholder(R.drawable.placeholder_movie).fit().into(ivItemMovie)
+
+            }
+        }
+    }
+
+    private fun bindTvShow(dataItem: DataItem.TvShowItem) {
+        binding.apply {
+            with(dataItem.tvShowItem) {
+                tvTitle.text = originalName
+                tvRate.text = voteAverage.toString()
+                tvYear.text = Utils.getYear(
+                    Utils.parseStringDate(firstAirDate)
+                ).toString()
+                Picasso.get()
+                    .load(Utils.getImageUrlLarge(posterPath))
+                    .placeholder(R.drawable.placeholder_movie).fit()
+                    .into(ivItemMovie)
 
             }
         }

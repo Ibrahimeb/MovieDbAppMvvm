@@ -19,7 +19,7 @@ data class ResultsItem(
     @field:SerializedName("poster_path")
     val posterPath: String,
     @field:SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @field:SerializedName("release_date")
     val releaseDate: String,
     @field:SerializedName("popularity")

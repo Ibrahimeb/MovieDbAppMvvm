@@ -18,10 +18,10 @@ data class TvListItemModels(
     val originalLanguage: String,
     val genreIds: List<Int>,
     val posterPath: String,
-    val backdropPath: String,
+    val backdropPath: String?,
     val originCountry: List<String>,
     val firstAirDate: String,
-    val popularity: Double,
+    val voteAverage: Double,
     @PrimaryKey
     val id: Int,
     val originPage:Int

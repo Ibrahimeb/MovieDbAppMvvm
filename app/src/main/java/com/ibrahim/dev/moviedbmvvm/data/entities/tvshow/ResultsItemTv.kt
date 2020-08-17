@@ -26,7 +26,7 @@ data class ResultsItemTv(
     val originCountry: List<String>,
 
     @field:SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
 
     @field:SerializedName("popularity")
     val popularity: Double,

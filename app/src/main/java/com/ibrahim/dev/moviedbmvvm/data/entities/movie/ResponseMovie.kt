@@ -23,7 +23,7 @@ data class ResponseMovie(
                 originalLanguage,
                 genreIds,
                 posterPath,
-                backdropPath,
+                backdropPath.orEmpty(),
                 releaseDate,
                 voteAverage,
                 id,

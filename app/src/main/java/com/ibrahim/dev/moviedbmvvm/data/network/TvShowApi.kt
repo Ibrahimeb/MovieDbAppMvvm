@@ -10,25 +10,29 @@ interface TvShowApi {
     @GET("tv/popular")
     suspend fun getTvPopular(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String
+        @Query("language") language: String = LANGUAGE
     ): ResponseTvShow
 
     @GET("tv/on_the_air")
     suspend fun getTvOnAir(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String
+        @Query("language") language: String = LANGUAGE
     ): ResponseTvShow
 
     @GET("tv/top_rated")
     suspend fun getTvtopRated(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String
+        @Query("language") language: String = LANGUAGE
     ): ResponseTvShow
 
     @GET("genre/tv/list")
     suspend fun getTvShowCategory(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String
+        @Query("language") language: String = LANGUAGE
     ): ResponseCategory
+
+    companion object {
+        const val LANGUAGE = "en-US"
+    }
 
 }

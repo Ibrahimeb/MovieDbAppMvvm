@@ -19,7 +19,7 @@ data class ResponseTvShow(
     @field:SerializedName("total_results")
     val totalResults: Int
 ) {
-    fun toModels() = TvModels(page, totalPages, results.map {
+    fun toModel() = TvModels(page, totalPages, results.map {
         with(it) {
             TvListItemModels(
                 overview,
@@ -27,10 +27,10 @@ data class ResponseTvShow(
                 originalLanguage,
                 genreIds,
                 posterPath,
-                backdropPath,
+                backdropPath.orEmpty(),
                 originCountry,
                 firstAirDate,
-                popularity,
+                voteAverage,
                 id,
                 page
             )
