@@ -1,19 +1,18 @@
 package com.ibrahim.dev.moviedbmvvm.app.data.commos
 
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.ibrahim.dev.moviedbmvvm.data.entities.movie.ResponseMovie
+import com.ibrahim.dev.moviedbmvvm.domain.models.movie.MovieModels
 
 interface MovieDao {
 
-    @Update
-    fun update(responseMovie: ResponseMovie)
-
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(responseMovie: ResponseMovie)
 
-    @Query("SELECT * FROM ResponseMovie WHERE page=:page")
-    fun getResponseMovieByPage(page:Int)
+    @Query("SELECT * FROM movieModels WHERE page=:page")
+    fun getResponseMovieByPage(page: Int): MovieModels?
 
 }
