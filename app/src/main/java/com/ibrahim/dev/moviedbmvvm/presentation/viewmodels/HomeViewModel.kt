@@ -11,11 +11,12 @@ import com.ibrahim.dev.moviedbmvvm.R
 import com.ibrahim.dev.moviedbmvvm.domain.usescase.HomeUseCase
 import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ActivityScoped
+@FragmentScoped
 class HomeViewModel @ViewModelInject constructor(
     private val useCase: HomeUseCase,
     @ActivityContext private val context:Context

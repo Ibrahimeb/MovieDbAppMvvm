@@ -11,6 +11,7 @@ import com.ibrahim.dev.moviedbmvvm.data.repository.MovieRepository
 import com.ibrahim.dev.moviedbmvvm.data.repository.TvShowRepository
 import com.ibrahim.dev.moviedbmvvm.domain.models.movie.MovieModels
 import com.ibrahim.dev.moviedbmvvm.domain.models.tvshow.TvModels
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
